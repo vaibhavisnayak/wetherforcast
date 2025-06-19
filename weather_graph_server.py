@@ -42,12 +42,11 @@ def weather_graph():
     img.seek(0)
     return send_file(img, mimetype='image/png')
 @app.route('/')
+from flask import Flask, render_template
+
+@app.route('/')
 def home():
-    return """
-    <h2>Weather Graph API is Running ✅</h2>
-    <p>Use <code>/weather-graph?city=CityName</code> to get a temperature chart.</p>
-    <p>Example: <a href="/weather-graph?city=Mumbai">/weather-graph?city=Mumbai</a></p>
-    """
+    return render_template('index.html')
 
 # Required for Render/production deployment
 if __name__ == '__main__':

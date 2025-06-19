@@ -1,6 +1,6 @@
 # weather_graph_server.py
 
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, render_template
 import matplotlib.pyplot as plt
 import io
 import requests
@@ -9,6 +9,10 @@ import os
 app = Flask(__name__)
 
 API_KEY = 'cb02c00e3a2d4244320d0652909cf5cf'  # Replace with your actual OpenWeatherMap API key
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/weather-graph')
 def weather_graph():
@@ -41,12 +45,6 @@ def weather_graph():
     plt.savefig(img, format='png')
     img.seek(0)
     return send_file(img, mimetype='image/png')
-@app.route('/')
-from flask import Flask, render_template
-
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 # Required for Render/production deployment
 if __name__ == '__main__':

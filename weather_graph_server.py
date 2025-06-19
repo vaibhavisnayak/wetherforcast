@@ -8,7 +8,7 @@ import os
 
 app = Flask(__name__)
 
-API_KEY = 'your_openweathermap_api_key'  # Replace with your actual OpenWeatherMap API key
+API_KEY = 'cb02c00e3a2d4244320d0652909cf5cf'  # Replace with your actual OpenWeatherMap API key
 
 @app.route('/weather-graph')
 def weather_graph():

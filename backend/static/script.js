@@ -7,7 +7,6 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     return;
   }
   getWeather(city);
-  showWeatherGraph(city);
 });
 
 function getWeather(city) {
@@ -21,22 +20,29 @@ function getWeather(city) {
       return response.json();
     })
     .then(data => {
-      displayWeather(data);
+      displayWeather(data, city);
     })
     .catch(error => {
       document.getElementById('weatherResult').innerHTML = `<p style="color:red;">${error.message}</p>`;
     });
 }
 
-function displayWeather(data) {
+function displayWeather(data, city) {
   const weatherHTML = `
     <h2>${data.name}, ${data.sys.country}</h2> 
     <p><strong>Temperature:</strong> ${data.main.temp} °C</p>
     <p><strong>Weather:</strong> ${data.weather[0].description}</p>
     <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
     <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
+    <button id="graphBtn" style="margin-top: 10px;">Get Forecast Graph</button>
+    <div id="graphContainer"></div>
   `;
   document.getElementById('weatherResult').innerHTML = weatherHTML;
+
+  // Add click listener for the newly added button
+  document.getElementById('graphBtn').addEventListener('click', () => {
+    showWeatherGraph(city);
+  });
 }
 
 function showWeatherGraph(city) {
@@ -44,5 +50,5 @@ function showWeatherGraph(city) {
     <h3>Temperature Forecast (Next 24 Hours)</h3>
     <img src="/weather-graph?city=${encodeURIComponent(city)}" alt="Weather Graph" style="max-width:100%; margin-top:10px;">
   `;
-  document.getElementById('weatherResult').innerHTML += graphHTML;
+  document.getElementById('graphContainer').innerHTML = graphHTML;
 }

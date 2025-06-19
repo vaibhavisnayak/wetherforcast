@@ -40,7 +40,9 @@ function displayWeather(data) {
 }
 
 function showWeatherGraph(city) {
-  const graphHTML = `<h3>Temperature Forecast (Next 24 Hours)</h3>
-                     <img src="/weather-graph?city=${encodeURIComponent(city)}" alt="Weather Graph" style="max-width:100%; margin-top:10px;">`;
+  const graphHTML = `
+    <h3>Temperature Forecast (Next 24 Hours)</h3>
+    <img src="/weather-graph?city=${encodeURIComponent(city)}" alt="Weather Graph" style="max-width:100%; margin-top:10px;">
+  `;
   document.getElementById('weatherResult').innerHTML += graphHTML;
 }

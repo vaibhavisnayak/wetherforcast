@@ -1,4 +1,4 @@
-const apiKey = 'cb02c00e3a2d4244320d0652909cf5cf';  
+const apiKey = 'cb02c00e3a2d4244320d0652909cf5cf';
 
 document.getElementById('searchBtn').addEventListener('click', () => {
   const city = document.getElementById('citySelect').value;
@@ -7,8 +7,8 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     return;
   }
   getWeather(city);
+  showWeatherGraph(city);
 });
-
 
 function getWeather(city) {
   const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
@@ -37,4 +37,10 @@ function displayWeather(data) {
     <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
   `;
   document.getElementById('weatherResult').innerHTML = weatherHTML;
+}
+
+function showWeatherGraph(city) {
+  const graphHTML = `<h3>Temperature Forecast (Next 24 Hours)</h3>
+                     <img src="/weather-graph?city=${encodeURIComponent(city)}" alt="Weather Graph" style="max-width:100%; margin-top:10px;">`;
+  document.getElementById('weatherResult').innerHTML += graphHTML;
 }
